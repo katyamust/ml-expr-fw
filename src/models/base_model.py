@@ -39,15 +39,11 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def predict(self,
-                **kwargs) -> None: ##what is should return?
+    def predict(self, **kwargs) -> None: ##what is should return?
         """
-        actual implementationa should be defined in sub class
-        :param paper: The paper that should be evaluated
-        :return: A list of results, one per review
+        actual implementation, parameters and retunr value should be defined in sub class
         """
         pass
-
 
     def get_hyperparams(self):
         """
@@ -75,7 +71,7 @@ class BaseModel(ABC):
         Loads a model from pickle. Note that some objects are not pickable.
         In such case the load method should be overridden.
         :param file_path: Path to pickle file
-        :return: An model of type PaperRecommendationModel
+        :return: An model of type BaseModel
         """
         with open(file_path, 'rb') as f:
             obj = pickle.load(f)
