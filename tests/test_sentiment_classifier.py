@@ -10,7 +10,7 @@ def mock_train_df():
     return pd.DataFrame (
         {
           'text':  ['excellent movie', 'did not like it', 'horrible actors'],
-          'label': ['1', '0', '0']
+          'label': [1, 0, 0]
         },
         columns=['text','label'])
 
@@ -33,7 +33,7 @@ def test_sentiment_classifier_predict(mock_train_df,mock_test_df):
     model.fit(mock_train_df)
     y = model.predict(mock_test_df)
 
-    assert y[0] == '1'
+    assert y[0] == 1
 
 
 
