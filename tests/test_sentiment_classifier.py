@@ -3,6 +3,7 @@ import pytest
 import pandas as pd
 
 from src.models.sentiment_classifier import SentimentClassifier
+from src.preprocessing.spacy_preprocessor import SpacyPreprocessor
 
 
 @pytest.fixture
@@ -34,6 +35,15 @@ def test_sentiment_classifier_predict(mock_train_df,mock_test_df):
     y = model.predict(mock_test_df)
 
     assert y[0] == 1
+
+
+def test_sentiment_classifier_can_fit_with_spacy_preprocessor(mock_train_df):
+
+    preprocessor = SpacyPreprocessor()
+    model = SentimentClassifier(preprocessor)
+    model.fit(mock_train_df)
+
+    assert model.X_tf_idf is not None and model.clf is not None
 
 
 

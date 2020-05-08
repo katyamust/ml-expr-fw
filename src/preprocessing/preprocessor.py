@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 
+
 class Preprocessor(ABC):
 
     def __init__(self,

@@ -4,7 +4,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 
-from .base_model import BaseModel
+from src.models.base_model import BaseModel
+from src.preprocessing import EmptyPreprocessor
 
 
 class SentimentClassifier(BaseModel):
@@ -13,6 +14,7 @@ class SentimentClassifier(BaseModel):
     """
 
     def __init__(self, model_name='SentimentClassifier',
+                 preprocessor=EmptyPreprocessor(),
                  feature="text"):
         """
         :param model_name: Name of model for logging and experimentation purposes

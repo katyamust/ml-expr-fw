@@ -3,6 +3,10 @@ import pickle
 from abc import ABC, abstractmethod
 from typing import Dict, List
 
+from src.preprocessing.preprocessor import Preprocessor
+from src.preprocessing.empty_preprocessor import EmptyPreprocessor
+
+
 class BaseModel(ABC):
     """
     Abstract class for a model with unified interface
@@ -11,7 +15,6 @@ class BaseModel(ABC):
     def __init__(self,
                  model_name=None,
                  preprocessor: Preprocessor = EmptyPreprocessor(),
-
                  hyper_params: Dict = None,
                  is_lazy=False):
         """
@@ -21,6 +24,7 @@ class BaseModel(ABC):
         :param is_lazy: whether this model needs to be fitted first
         """
 
+        self.preprocessor = preprocessor
         if model_name:
             self.model_name = model_name
         else:
