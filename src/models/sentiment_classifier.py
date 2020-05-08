@@ -56,7 +56,7 @@ class SentimentClassifier(BaseModel):
         imdb_test_df = df_test
         corpus = imdb_test_df[self.feature]
 
-        X_test = self.vectorizer.fit_transform(corpus)
+        X_test = self.vectorizer.transform(corpus)
 
         y_predict = self.clf.predict(X_test)
 

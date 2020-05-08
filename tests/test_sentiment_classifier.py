@@ -17,7 +17,7 @@ def mock_train_df():
 
 @pytest.fixture
 def mock_test_df():
-    return pd.DataFrame({'text': ['What df I can say about this movie', 'ha ha ha']}, columns=['text'])
+    return pd.DataFrame({'text': ['What I can say about this movie', 'ha ha ha']}, columns=['text'])
 
 
 def test_sentiment_classifier_can_fit(mock_train_df):
@@ -33,7 +33,7 @@ def test_sentiment_classifier_predict(mock_train_df,mock_test_df):
     model.fit(mock_train_df)
     y = model.predict(mock_test_df)
 
-    assert y[0] == '0'
+    assert y[0] == '1'
 
 
 
