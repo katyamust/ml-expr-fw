@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import List
 
+from src.preprocessing.data_preprocessor import DataPreprocessor
 
-class Preprocessor(ABC):
+
+class TextPreprocessor(DataPreprocessor):
 
     def __init__(self,
                  name=None,
@@ -18,6 +20,7 @@ class Preprocessor(ABC):
         :param pos_to_remove: list of PoS tags to remove
         :param normalize:  Options=("Stem","Lemmatize"). If to apply stemming or lemmatization"""
 
+        super().__init__()
         if name:
             self._name = name
         else:
@@ -28,8 +31,7 @@ class Preprocessor(ABC):
         self._remove_stopwords = remove_stopwords
         self._normalize = normalize
 
-
-    def preprocess_text(self, text):
+    def preprocess(self, text):
         """
         Returns a clean version of the text string
         :param text: text to preprocess
@@ -37,7 +39,7 @@ class Preprocessor(ABC):
         """
         pass
 
-    def preprocess_text_list(self, texts):
+    def preprocess_as_list(self, texts):
         """
         Returns a clean version of the text string
         :param texts: list of texts to preprocess

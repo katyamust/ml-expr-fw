@@ -3,10 +3,10 @@ import re
 import nltk
 from nltk.corpus import stopwords
 
-from continuous_review.text_preprocessing.preprocessor import Preprocessor
+from src.preprocessing.text_preprocessor import TextPreprocessor
 
 
-class NltkPreprocessor(Preprocessor):
+class NltkTextPreprocessor(TextPreprocessor):
 
     def __init__(self,
                  remove_numbers=True,
@@ -25,14 +25,14 @@ class NltkPreprocessor(Preprocessor):
         # nltk.download('wordnet')
         # nltk.download('averaged_perceptron_tagger')
 
-    def preprocess_text_list(self, texts):
+    def preprocess_as_list(self, texts):
         clean_texts = []
         for text in texts:
-            clean_texts.append(self.preprocess_text(text))
+            clean_texts.append(self.preprocess(text))
 
         return clean_texts
 
-    def preprocess_text(self, text):
+    def preprocess(self, text):
 
         # Normalize text
         text = text.lower().strip()

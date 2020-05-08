@@ -3,7 +3,7 @@ import pytest
 import pandas as pd
 
 from src.models.sentiment_classifier import SentimentClassifier
-from src.preprocessing.spacy_preprocessor import SpacyPreprocessor
+from src.preprocessing.spacy_text_preprocessor import SpacyTextPreprocessor
 
 
 @pytest.fixture
@@ -39,7 +39,7 @@ def test_sentiment_classifier_predict(mock_train_df,mock_test_df):
 
 def test_sentiment_classifier_can_fit_with_spacy_preprocessor(mock_train_df):
 
-    preprocessor = SpacyPreprocessor()
+    preprocessor = SpacyTextPreprocessor()
     model = SentimentClassifier(preprocessor)
     model.fit(mock_train_df)
 

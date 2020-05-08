@@ -1,6 +1,7 @@
-from .preprocessor import Preprocessor
-from .empty_preprocessor import EmptyPreprocessor
-from .nltk_preprocessor import NltkPreprocessor
-from .spacy_preprocessor import SpacyPreprocessor
+from .data_preprocessor import DataPreprocessor
+from .text_preprocessor import TextPreprocessor
+from .empty_text_preprocessor import EmptyTextPreprocessor
+from .nltk_text_preprocessor import NltkTextPreprocessor
+from .spacy_text_preprocessor import SpacyTextPreprocessor
 
-__all__ = ["Preprocessor", "EmptyPreprocessor", "NltkPreprocessor", "SpacyPreprocessor"]
+__all__ = ["DataPreprocessor", "TextPreprocessor", "EmptyTextPreprocessor", "NltkTextPreprocessor", "SpacyTextPreprocessor"]

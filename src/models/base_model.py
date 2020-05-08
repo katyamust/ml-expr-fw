@@ -3,8 +3,7 @@ import pickle
 from abc import ABC, abstractmethod
 from typing import Dict, List
 
-from src.preprocessing.preprocessor import Preprocessor
-from src.preprocessing.empty_preprocessor import EmptyPreprocessor
+from src.preprocessing.data_preprocessor import DataPreprocessor
 
 
 class BaseModel(ABC):
@@ -14,7 +13,7 @@ class BaseModel(ABC):
 
     def __init__(self,
                  model_name=None,
-                 preprocessor: Preprocessor = EmptyPreprocessor(),
+                 preprocessor: DataPreprocessor = None,
                  hyper_params: Dict = None,
                  is_lazy=False):
         """

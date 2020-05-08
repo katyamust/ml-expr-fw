@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 
 from src.models.base_model import BaseModel
-from src.preprocessing import EmptyPreprocessor
+from src.preprocessing.empty_text_preprocessor import EmptyTextPreprocessor
 
 
 class SentimentClassifier(BaseModel):
@@ -14,7 +14,7 @@ class SentimentClassifier(BaseModel):
     """
 
     def __init__(self, model_name='SentimentClassifier',
-                 preprocessor=EmptyPreprocessor(),
+                 preprocessor=EmptyTextPreprocessor(),
                  feature="text"):
         """
         :param model_name: Name of model for logging and experimentation purposes
@@ -26,7 +26,7 @@ class SentimentClassifier(BaseModel):
         self.X_tf_idf = None
         self.clf = None
         hyper_params = {"feature": feature}
-        super().__init__(model_name=model_name, hyper_params=hyper_params)
+        super().__init__(model_name=model_name, preprocessor=preprocessor, hyper_params=hyper_params)
         logging.info(f"Created model {self.model_name} ")
 
     def fit(self, df: pd.DataFrame) -> None:
@@ -37,7 +37,7 @@ class SentimentClassifier(BaseModel):
         """
 
         imdb_train_df = df
-        corpus = imdb_train_df[self.feature].values
+        corpus = self.preprocessor.preprocess(imdb_train_df[self.feature].values)
 
         logging.info("Finished preprocessing papers, fitting TF IDF vectorizer")
 

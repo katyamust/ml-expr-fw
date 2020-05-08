@@ -5,10 +5,10 @@ import spacy
 from spacy.language import Language
 from tqdm import tqdm
 
-from continuous_review.text_preprocessing import Preprocessor
+from src.preprocessing.text_preprocessor import TextPreprocessor
 
 
-class SpacyPreprocessor(Preprocessor):
+class SpacyTextPreprocessor(TextPreprocessor):
 
     @staticmethod
     def download_spacy_model(model="en_core_web_sm"):
@@ -38,11 +38,11 @@ class SpacyPreprocessor(Preprocessor):
         else:
             self.model = spacy_model
 
-    def preprocess_text(self, text):
+    def preprocess(self, text):
         doc = self.model(text)
         return self.__clean(doc)
 
-    def preprocess_text_list(self, texts=List[str]):
+    def preprocess_as_list(self, texts=List[str]):
         clean_texts = []
         for doc in tqdm(self.model.pipe(texts)):
             clean_texts.append(self.__clean(doc))
