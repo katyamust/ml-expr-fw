@@ -10,10 +10,13 @@ class BaseModel(ABC):
 
     def __init__(self,
                  model_name=None,
+                 preprocessor: Preprocessor = EmptyPreprocessor(),
+
                  hyper_params: Dict = None,
                  is_lazy=False):
         """
         :param model_name: Model name, to be used by the experiment manager
+        :param preprocessor: Preprocessor object that would preprocess each input sample
         :param hyper_params: A dictionary of model hyperparams for the model, to be tracked in the experiment manager
         :param is_lazy: whether this model needs to be fitted first
         """
