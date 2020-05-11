@@ -17,22 +17,20 @@ class BaseModel(ABC):
                  preprocessor: DataPreprocessor = None,
                  postprocessor: DataPostprocessor = None,
                  **kwargs):
-                 # hyper_params: Dict = None):
         """
         :param model_name: Model name, to be used by the experiment manager
         :param preprocessor: Preprocessor object that would preprocess each input sample
-        :param postprocessor: Postprocessor object that would postprocess data after traning/inference
-        :param hyper_params: A dictionary of model hyperparams for the model, to be tracked in the experiment manager
+        :param postprocessor: Postprocessor object that would postprocess data after training/inference
         """
-
-        self.preprocessor = preprocessor
-        self.postprocessor = postprocessor
         if model_name:
             self.model_name = model_name
         else:
             self.model_name = self.__class__.__name__
 
-        self.hyper_params = Dict
+        self.preprocessor = preprocessor
+        self.postprocessor = postprocessor
+
+        self.hyper_params = {}
         self.hyper_params.update(kwargs)
 
         logging.info(
