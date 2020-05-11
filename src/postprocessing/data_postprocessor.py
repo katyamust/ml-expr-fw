@@ -5,8 +5,7 @@ class DataPostprocessor(ABC):
 
     def __init__(self):
         """
-        Umbrella abstract class for all post training data processors.
-        Treats data after running a model
+        Umbrella abstract class for all post data processors
         """
 
     @abstractmethod

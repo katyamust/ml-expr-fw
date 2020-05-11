@@ -23,9 +23,7 @@ class SentimentClassifier(BaseModel):
         :param model_name: name of model
         :param preprocessor: TextPreprocessor object for text data in this example
         :param postprocessor: TextPostprocessor object for text data in this example
-        :param x_column_name: specific hyper parameter for this particular model example: we will use column "text" as a feature in input pandas DataFrame
-        :param y_label_name: specific hyper parameter for this particular model example: we will use column "label" as label in input pandas DataFrame
-
+        :param feature_set: specific set of features for this example model implementation
         """
 
         if feature_set is None:
