@@ -3,8 +3,8 @@ import pickle
 from abc import ABC, abstractmethod
 from typing import Dict, List
 
-from src.preprocessing.data_preprocessor import DataPreprocessor
-from src.postprocessing.data_postprocessor import DataPostprocessor
+from src.preprocessing import DataPreprocessor
+from src.postprocessing import DataPostprocessor
 
 
 class BaseModel(ABC):
@@ -16,14 +16,13 @@ class BaseModel(ABC):
                  model_name=None,
                  preprocessor: DataPreprocessor = None,
                  postprocessor: DataPostprocessor = None,
-                 hyper_params: Dict = None,
-                 is_lazy=False):
+                 **kwargs):
+                 # hyper_params: Dict = None):
         """
         :param model_name: Model name, to be used by the experiment manager
         :param preprocessor: Preprocessor object that would preprocess each input sample
         :param postprocessor: Postprocessor object that would postprocess data after traning/inference
         :param hyper_params: A dictionary of model hyperparams for the model, to be tracked in the experiment manager
-        :param is_lazy: whether this model needs to be fitted first
         """
 
         self.preprocessor = preprocessor
@@ -33,8 +32,8 @@ class BaseModel(ABC):
         else:
             self.model_name = self.__class__.__name__
 
-        self.hyper_params = hyper_params
-        self.is_lazy = is_lazy
+        self.hyper_params = Dict
+        self.hyper_params.update(kwargs)
 
         logging.info(
              f"Created model {self.model_name} "
@@ -49,9 +48,9 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def predict(self, **kwargs) -> None: ##what is should return?
+    def predict(self, **kwargs):
         """
-        actual implementation, parameters and retunr value should be defined in sub class
+        actual implementation, parameters and return value should be defined in subclass
         """
         pass
 
