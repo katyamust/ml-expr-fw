@@ -18,16 +18,19 @@ class SentimentClassifier(BaseModel):
     def __init__(self, model_name='SentimentClassifier',
                  preprocessor=EmptyTextPreprocessor(),
                  postprocessor= EmptyPostprocessor(),
-                 x_column_name="text",
-                 y_label_name="label"):
+                 feature_set=None):
         """
         :param model_name: name of model
         :param preprocessor: TextPreprocessor object for text data in this example
         :param postprocessor: TextPostprocessor object for text data in this example
-        :param x_column_name: specific hyper parameter for this particular model example: we will use column "text"
-        :param y_label_name: specific hyper parameter for this particular model example: we will use column "label"
-       in input pandas DataFrame
+        :param x_column_name: specific hyper parameter for this particular model example: we will use column "text" as a feature in input pandas DataFrame
+        :param y_label_name: specific hyper parameter for this particular model example: we will use column "label" as label in input pandas DataFrame
+
         """
+
+        if feature_set is None:
+            feature_set = {'x_column_name': 'text', 'y_label_name': 'label'}
+        self.feature_set = feature_set
 
         self.vectorizer = TfidfVectorizer()
         self.X_tf_idf = None
@@ -36,8 +39,8 @@ class SentimentClassifier(BaseModel):
         super().__init__(model_name=model_name,
                          preprocessor=preprocessor,
                          postprocessor=postprocessor,
-                         x_column_name=x_column_name,
-                         y_label_name=y_label_name)
+                         feature_set=self.feature_set)
+        print(self.hyper_params)
 
 
     def fit(self, df: pd.DataFrame) -> None:
@@ -48,18 +51,18 @@ class SentimentClassifier(BaseModel):
         """
 
         imdb_train_df = df
-        corpus = self.preprocessor.preprocess(imdb_train_df[self.hyper_params["x_column_name"]].values)
+        corpus = self.preprocessor.preprocess(imdb_train_df[self.feature_set["x_column_name"]].values)
 
-        logging.info("Finished preprocessing papers, fitting TF IDF vectorizer")
+        logging.info("Finished preprocessing input data, fitting TF IDF vectorizer")
 
         self.X_tf_idf = self.vectorizer.fit_transform(corpus)
 
         logging.info("Fitting classifier")
         self.clf = SGDClassifier()
-        Y_train = imdb_train_df[self.hyper_params["y_label_name"]].values
+        Y_train = imdb_train_df[self.feature_set["y_label_name"]].values
         self.clf.fit(self.X_tf_idf, Y_train)
 
-        logging.info("Finished fitting vectorizer")
+        logging.info("Finished fitting model")
 
     def predict(self, df_test: pd.DataFrame) -> pd.DataFrame:
         """
@@ -67,7 +70,7 @@ class SentimentClassifier(BaseModel):
         :param df_test: pandas DataFrame of movie text reviews, consists of 1 column ["text"]
         """
         imdb_test_df = df_test
-        corpus = imdb_test_df[self.hyper_params["x_column_name"]]
+        corpus = imdb_test_df[self.feature_set["x_column_name"]]
 
         X_test = self.vectorizer.transform(corpus)
 
