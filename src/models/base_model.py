@@ -41,14 +41,16 @@ class BaseModel(ABC):
     def fit(self, X, y=None) -> None:
         """
         Trains/fits a model
-        :return: None
+        :param X: train data
+        :param y: optional label
         """
         pass
 
     @abstractmethod
     def predict(self, X):
         """
-        actual implementation, parameters and return value should be defined in subclass
+        Predicts with fitted model
+        @param X: inference data
         """
         pass
 

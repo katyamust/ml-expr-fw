@@ -24,15 +24,20 @@ def mock_test_df():
 def test_sentiment_classifier_can_fit(mock_train_df):
 
     model = SentimentClassifier()
-    model.fit(mock_train_df)
+    X = mock_train_df["text"].values
+    y = mock_train_df["label"].values
+    model.fit(X,y)
 
-    assert model.X_tf_idf is not None and model.clf is not None
+    assert pytest.approx(model.clf.coef_[0][0], 0.001) == -6.93
 
 
 def test_sentiment_classifier_predict(mock_train_df,mock_test_df):
     model = SentimentClassifier()
-    model.fit(mock_train_df)
-    y = model.predict(mock_test_df)
+    X = mock_train_df["text"].values
+    y = mock_train_df["label"].values
+    model.fit(X,y)
+    Xp = mock_test_df["text"].values
+    y = model.predict(Xp)
 
     assert y[0] == 1
 
@@ -41,9 +46,11 @@ def test_sentiment_classifier_can_fit_with_spacy_preprocessor(mock_train_df):
 
     preprocessor = SpacyTextPreprocessor()
     model = SentimentClassifier(preprocessor)
-    model.fit(mock_train_df)
+    X = mock_train_df["text"].values
+    y = mock_train_df["label"].values
+    model.fit(X,y)
 
-    assert model.X_tf_idf is not None and model.clf is not None
+    assert pytest.approx(model.clf.coef_[0][0], 0.001) == -6.93
 
 
 

@@ -17,62 +17,47 @@ class SentimentClassifier(BaseModel):
 
     def __init__(self, model_name='SentimentClassifier',
                  preprocessor=EmptyTextPreprocessor(),
-                 postprocessor= EmptyPostprocessor(),
-                 feature_set=None):
+                 postprocessor= EmptyPostprocessor()
+                 ):
         """
         :param model_name: name of model
         :param preprocessor: TextPreprocessor object for text data in this example
         :param postprocessor: TextPostprocessor object for text data in this example
-        :param feature_set: specific set of features for this example model implementation
         """
 
-        if feature_set is None:
-            feature_set = {'x_column_name': 'text', 'y_label_name': 'label'}
-        self.feature_set = feature_set
-
         self.vectorizer = TfidfVectorizer()
-        self.X_tf_idf = None
-        self.clf = None
+        self.clf = SGDClassifier()
 
         super().__init__(model_name=model_name,
                          preprocessor=preprocessor,
-                         postprocessor=postprocessor,
-                         feature_set=self.feature_set)
-        print(self.hyper_params)
+                         postprocessor=postprocessor)
 
-
-    def fit(self, df: pd.DataFrame) -> None:
+    def fit(self, X, y=None) -> None:
         """
-        Fits model using pandas DataFrame as input dataset
+        Fits model
         Calculates TF-IDF vectors and fits SGDClassifier model
-        :param df: input dataset with 2 columns ["text"] and ["value"]
+        :param X: input train data list of movie reviews
+        :param y: input train label sentiment for each review
         """
-
-        imdb_train_df = df
-        corpus = self.preprocessor.preprocess(imdb_train_df[self.feature_set["x_column_name"]].values)
+        corpus = self.preprocessor.preprocess(X)
 
         logging.info("Finished preprocessing input data, fitting TF IDF vectorizer")
 
-        self.X_tf_idf = self.vectorizer.fit_transform(corpus)
+        X_tf_idf = self.vectorizer.fit_transform(corpus)
 
         logging.info("Fitting classifier")
-        self.clf = SGDClassifier()
-        Y_train = imdb_train_df[self.feature_set["y_label_name"]].values
-        self.clf.fit(self.X_tf_idf, Y_train)
+        self.clf.fit(X_tf_idf, y)
 
         logging.info("Finished fitting model")
 
-    def predict(self, df_test: pd.DataFrame) -> pd.DataFrame:
+    def predict(self, X) -> pd.DataFrame:
         """
-        Predicts movie review movie sentiment
-        :param df_test: pandas DataFrame of movie text reviews, consists of 1 column ["text"]
+        Predicts movie reviews  sentiment
+        :param X: list of of movie text reviews
+        :return:  list of sentiment value 0 or 1 for each review
         """
-        imdb_test_df = df_test
-        corpus = imdb_test_df[self.feature_set["x_column_name"]]
-
-        X_test = self.vectorizer.transform(corpus)
-
-        y_predict = self.clf.predict(X_test)
-
-        self.postprocessor.postprocess(y_predict)
-        return y_predict
+        corpus = self.preprocessor.preprocess(X)
+        Xp_tf_idf = self.vectorizer.transform(corpus)
+        y_predicted = self.clf.predict(Xp_tf_idf)
+        self.postprocessor.postprocess(y_predicted)
+        return y_predicted
