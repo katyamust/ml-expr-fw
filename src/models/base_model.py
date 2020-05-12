@@ -16,11 +16,12 @@ class BaseModel(ABC):
                  model_name=None,
                  preprocessor: DataPreprocessor = None,
                  postprocessor: DataPostprocessor = None,
-                 **kwargs):
+                 **hyper_params):
         """
         :param model_name: Model name, to be used by the experiment manager
         :param preprocessor: Preprocessor object that would preprocess each input sample
         :param postprocessor: Postprocessor object that would postprocess data after training/inference
+        :param hyper_params: any specific parameter for the model should passed here to be logged
         """
         if model_name:
             self.model_name = model_name
@@ -30,15 +31,14 @@ class BaseModel(ABC):
         self.preprocessor = preprocessor
         self.postprocessor = postprocessor
 
-        self.hyper_params = {}
-        self.hyper_params.update(kwargs)
+        self.hyper_params = hyper_params
 
         logging.info(
              f"Created model {self.model_name} "
              f"and hyperparams {self.hyper_params}")
 
     @abstractmethod
-    def fit(self, **kwargs) -> None:
+    def fit(self, X, y=None) -> None:
         """
         Trains/fits a model
         :return: None
@@ -46,7 +46,7 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def predict(self, **kwargs):
+    def predict(self, X):
         """
         actual implementation, parameters and return value should be defined in subclass
         """
