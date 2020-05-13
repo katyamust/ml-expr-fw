@@ -5,8 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 
 from src.models.base_model import BaseModel
-from src.preprocessing.empty_text_preprocessor import EmptyTextPreprocessor
-from src.postprocessing.empty_postprocessor import EmptyPostprocessor
+from src.preprocessing_new import EmptyProcessor
 
 
 class SentimentClassifier(BaseModel):
@@ -16,8 +15,8 @@ class SentimentClassifier(BaseModel):
     """
 
     def __init__(self, model_name='SentimentClassifier',
-                 preprocessor=EmptyTextPreprocessor(),
-                 postprocessor= EmptyPostprocessor()
+                 preprocessor=EmptyProcessor(),
+                 postprocessor=EmptyProcessor()
                  ):
         """
         :param model_name: name of model
@@ -39,7 +38,7 @@ class SentimentClassifier(BaseModel):
         :param X: input train data list of movie reviews
         :param y: input train label sentiment for each review
         """
-        corpus = self.preprocessor.preprocess(X)
+        corpus = self.preprocessor.apply(X)
 
         logging.info("Finished preprocessing input data, fitting TF IDF vectorizer")
 
@@ -56,8 +55,8 @@ class SentimentClassifier(BaseModel):
         :param X: list of of movie text reviews
         :return:  list of sentiment value 0 or 1 for each review
         """
-        corpus = self.preprocessor.preprocess(X)
+        corpus = self.preprocessor.apply(X)
         Xp_tf_idf = self.vectorizer.transform(corpus)
         y_predicted = self.clf.predict(Xp_tf_idf)
-        self.postprocessor.postprocess(y_predicted)
+        self.postprocessor.apply(y_predicted)
         return y_predicted

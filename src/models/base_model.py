@@ -3,8 +3,7 @@ import pickle
 from abc import ABC, abstractmethod
 from typing import Dict, List
 
-from src.preprocessing import DataPreprocessor
-from src.postprocessing import DataPostprocessor
+from src.preprocessing_new import DataProcessor
 
 
 class BaseModel(ABC):
@@ -14,8 +13,8 @@ class BaseModel(ABC):
 
     def __init__(self,
                  model_name=None,
-                 preprocessor: DataPreprocessor = None,
-                 postprocessor: DataPostprocessor = None,
+                 preprocessor: DataProcessor = None,
+                 postprocessor: DataProcessor = None,
                  **hyper_params):
         """
         :param model_name: Model name, to be used by the experiment manager
