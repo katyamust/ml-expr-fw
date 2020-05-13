@@ -1,7 +1,9 @@
 import logging
 import pickle
 from abc import ABC, abstractmethod
-from typing import Dict, List
+
+from src.data_processing import DataProcessor
+
 
 class BaseModel(ABC):
     """
@@ -10,38 +12,43 @@ class BaseModel(ABC):
 
     def __init__(self,
                  model_name=None,
-                 hyper_params: Dict = None,
-                 is_lazy=False):
+                 preprocessor: DataProcessor = None,
+                 postprocessor: DataProcessor = None,
+                 **hyper_params):
         """
         :param model_name: Model name, to be used by the experiment manager
-        :param hyper_params: A dictionary of model hyperparams for the model, to be tracked in the experiment manager
-        :param is_lazy: whether this model needs to be fitted first
+        :param preprocessor: Preprocessor object that would preprocess each input sample
+        :param postprocessor: Postprocessor object that would postprocess data after training/inference
+        :param hyper_params: any specific parameter for the model should passed here to be logged
         """
-
         if model_name:
             self.model_name = model_name
         else:
             self.model_name = self.__class__.__name__
 
+        self.preprocessor = preprocessor
+        self.postprocessor = postprocessor
+
         self.hyper_params = hyper_params
-        self.is_lazy = is_lazy
 
         logging.info(
              f"Created model {self.model_name} "
              f"and hyperparams {self.hyper_params}")
 
     @abstractmethod
-    def fit(self, **kwargs) -> None:
+    def fit(self, X, y=None) -> None:
         """
         Trains/fits a model
-        :return: None
+        :param X: train data
+        :param y: optional label
         """
         pass
 
     @abstractmethod
-    def predict(self, **kwargs) -> None: ##what is should return?
+    def predict(self, X):
         """
-        actual implementation, parameters and retunr value should be defined in sub class
+        Predicts with fitted model
+        @param X: inference data
         """
         pass
 
