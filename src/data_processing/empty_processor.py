@@ -1,4 +1,4 @@
-from src.preprocessing_new import DataProcessor
+from src.data_processing import DataProcessor
 
 
 class EmptyProcessor(DataProcessor):

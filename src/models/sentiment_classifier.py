@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 
 from src.models.base_model import BaseModel
-from src.preprocessing_new import EmptyProcessor
+from src.data_processing import EmptyProcessor
 
 
 class SentimentClassifier(BaseModel):

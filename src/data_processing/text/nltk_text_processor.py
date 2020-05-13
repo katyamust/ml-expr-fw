@@ -3,7 +3,7 @@ import re
 import nltk
 from nltk.corpus import stopwords
 
-from src.preprocessing_new import TextProcessor
+from src.data_processing.text import TextProcessor
 
 
 class NltkTextProcessor(TextProcessor):

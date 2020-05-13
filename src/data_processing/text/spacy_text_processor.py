@@ -5,7 +5,7 @@ import spacy
 from spacy.language import Language
 from tqdm import tqdm
 
-from src.preprocessing_new import TextProcessor
+from src.data_processing.text import TextProcessor
 
 
 class SpacyTextProcessor(TextProcessor):

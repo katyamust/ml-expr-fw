@@ -1,9 +1,8 @@
 import logging
 import pickle
 from abc import ABC, abstractmethod
-from typing import Dict, List
 
-from src.preprocessing_new import DataProcessor
+from src.data_processing import DataProcessor
 
 
 class BaseModel(ABC):
