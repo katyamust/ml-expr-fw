@@ -1,10 +1,49 @@
-MLExperimentationFramework
+Fabric ML
 ==============================
 
-Experimentation framework for data science teams
+Experimentation framework for data scientists and data science teams
 
-Project Organization
-------------
+
+## What does this do?
+First, it builds on top of the awesome 
+[CookieCutter-DataScience](https://drivendata.github.io/cookiecutter-data-science/) template which takes care of your project structure and python package setup.
+Then, it adds more functionality for conducting structured, 
+reproducible and robust experimentation.
+
+Here's How:
+##### 1. By defining a clear structure for the main building blocks
+
+- Getting data
+- Preprocessing, feature engineering and postprocessing
+- Modeling
+- Evaluation
+- Running experiments
+    
+This structure brings easier testing, experimentation and model productization, 
+as all models, preprocesors and postprocessors have the same API.
+
+##### 2. By providing a template for all notebooks
+All notebooks looks the same: Get the data, preprocess it, fit a model, evaluate. 
+Why not make this standardized so you won't have any errors?
+
+This template helps you set up new experiments easier. The template is written in a text file so it's easier to source-control it.
+See this example: [template_example](notebook_templates/example_template.md).
+
+Generate a new notebook using:
+```sh
+python generate_notebook --name my_new_notebook.ipynb
+```
+
+See notebook generation options:
+```sh
+python generate_notebook --help
+```
+
+##### 3. By getting experiment logging for free
+The experiments are structured in a way, that you will always be able to reproduce any experiment, 
+as code, hyperparams, data versions and metrics are stored in one of the provided experimentation engines 
+
+##### 4. By leveraging the CookieCutter Data science project structure
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
