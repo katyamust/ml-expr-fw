@@ -1,4 +1,4 @@
-from src.data_processing import DataProcessor
+from mlfabric.data_processing import DataProcessor
 
 
 class EmptyProcessor(DataProcessor):

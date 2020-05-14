@@ -5,7 +5,7 @@ try:
 except ImportError:
     pass
 
-from src.experimentation import Experimentation
+from mlfabric.experimentation import Experimentation
 
 
 class AmlExperimentation(Experimentation):

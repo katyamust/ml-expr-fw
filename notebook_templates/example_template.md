@@ -20,11 +20,11 @@ import pandas as pd
 import numpy as np
 import spacy
 
-from src import ExperimentRunner, Evaluator, EvaluationResult
-from src.data_loader import BlobDataLoader
-from src.preprocessing import SpacyPreprocessor
-from src.evaluation import SentimentEvaluator
-from src.models import BaseModel
+from mlfabric import ExperimentRunner, Evaluator, EvaluationResult
+from mlfabric.data_loader import BlobDataLoader
+from mlfabric.preprocessing import SpacyPreprocessor
+from mlfabric.evaluation import SentimentEvaluator
+from mlfabric.models import BaseModel
 from src.experimentation import MlflowExperimentation
 
 ```

@@ -18,8 +18,8 @@ Define imports
 import pandas as pd
 import numpy as np
 
-from src import ExperimentRunner, Evaluator, EvaluationResult
-from src.models import BaseModel
+from mlfabric import ExperimentRunner, Evaluator, EvaluationResult
+from mlfabric.models import BaseModel
 from src.experimentation import MlflowExperimentation
 
 ```

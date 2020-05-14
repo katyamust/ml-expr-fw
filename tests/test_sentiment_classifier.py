@@ -2,8 +2,8 @@ import pytest
 
 import pandas as pd
 
-from src.models.sentiment_classifier import SentimentClassifier
-from src.data_processing.text import SpacyTextProcessor
+from samples.nlp_sentiment_analysis.sentiment_classifier import SentimentClassifier
+from mlfabric.data_processing.text import SpacyTextProcessor
 
 
 @pytest.fixture

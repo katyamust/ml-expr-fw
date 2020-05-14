@@ -13,7 +13,7 @@ with open('VERSION') as version_file:
 
 
 setup(
-    name='src',
+    name='mlfabric',
     packages=find_packages(),
     version=__version__,
     description='Experimentation framework for data science teams',

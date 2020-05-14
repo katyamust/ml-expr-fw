@@ -1,6 +1,6 @@
-from src import ExperimentRunner, Evaluator, EvaluationResult
-from src.experimentation import Experimentation, MlflowExperimentation
-from src.models import BaseModel
+from mlfabric import ExperimentRunner, Evaluator, EvaluationResult
+from mlfabric.experimentation import Experimentation, MlflowExperimentation
+from mlfabric.models import BaseModel
 
 
 class MockModel(BaseModel):
