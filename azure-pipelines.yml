@@ -34,15 +34,14 @@ steps:
       pip install --upgrade setuptools
       pip install wheel
       pip install -r requirements.txt
-      echo "print current mlfabric current dir"
-      pwd
-      ls
       python setup.py install
+      pip install -r samples/nlp_sentiment_analysis/requirements.txt
     displayName: "Install dependencies"
 
   - script: |
       pip install pytest pytest-azurepipelines
-      pytest --ignore="samples/"
+      # pytest --ignore="samples/"
+      pytest
     displayName: "pytest"
 
   - script: |
