@@ -34,6 +34,7 @@ steps:
       pip install --upgrade setuptools
       pip install wheel
       pip install -r requirements.txt
+      pwd
       python setup.py install
     displayName: "Install dependencies"
 
