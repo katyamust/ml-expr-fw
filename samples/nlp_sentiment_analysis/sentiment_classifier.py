@@ -4,8 +4,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 
-from mlfabric.models.base_model import BaseModel
-from mlfabric.data_processing import EmptyProcessor
+from mlfabric import BaseModel
+from mlfabric import EmptyProcessor
 
 
 class SentimentClassifier(BaseModel):

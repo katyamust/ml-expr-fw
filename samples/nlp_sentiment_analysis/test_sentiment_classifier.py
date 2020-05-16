@@ -3,7 +3,7 @@ import pytest
 import pandas as pd
 
 from samples.nlp_sentiment_analysis.sentiment_classifier import SentimentClassifier
-from mlfabric.data_processing.text import SpacyTextProcessor
+from mlfabric import SpacyTextProcessor
 
 @pytest.fixture
 def mock_train_df():
