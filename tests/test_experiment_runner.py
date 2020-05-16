@@ -1,6 +1,6 @@
 from mlfabric import ExperimentRunner, Evaluator, EvaluationResult
 from mlfabric.experimentation import Experimentation, MlflowExperimentation
-from mlfabric import BaseModel
+from mlfabric.models import BaseModel
 
 
 class MockModel(BaseModel):
