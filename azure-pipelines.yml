@@ -34,6 +34,9 @@ steps:
       pip install --upgrade setuptools
       pip install wheel
       pip install -r requirements.txt
+      echo "print current mlfabric current dir"
+      pwd
+      ls
       python setup.py install
     displayName: "Install dependencies"
 
