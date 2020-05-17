@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import List
 
-from src.data_processing import DataProcessor
+from mlfabric.data_processing import DataProcessor
 
 
 class TextProcessor(DataProcessor):

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.evaluation import EvaluationResult
+from mlfabric.evaluation import EvaluationResult
 
 
 class Experimentation(ABC):

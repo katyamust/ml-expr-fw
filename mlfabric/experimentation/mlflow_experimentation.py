@@ -3,7 +3,7 @@ import os
 import uuid
 from pathlib import Path
 
-from src.experimentation import Experimentation
+from mlfabric.experimentation import Experimentation
 
 # Optional imports for this experimentation module
 try:

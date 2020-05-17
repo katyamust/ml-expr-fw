@@ -1,8 +1,8 @@
 import logging
 
-from src.evaluation import EvaluationResult, Evaluator
-from src.experimentation import Experimentation
-from src.models import BaseModel
+from mlfabric.evaluation import EvaluationResult, Evaluator
+from mlfabric.experimentation import Experimentation
+from mlfabric.models import BaseModel
 
 
 class ExperimentRunner:

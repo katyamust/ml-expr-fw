@@ -2,8 +2,8 @@ import logging
 import pickle
 from abc import ABC, abstractmethod
 
-from src.experimentation import Experimentation
-from src.data_processing import DataProcessor
+from mlfabric.experimentation import Experimentation
+from mlfabric.data_processing import DataProcessor
 
 
 class BaseModel(ABC):

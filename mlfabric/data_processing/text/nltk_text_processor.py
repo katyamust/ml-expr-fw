@@ -3,7 +3,7 @@ import re
 import nltk
 from nltk.corpus import stopwords
 
-from src.data_processing.text import TextProcessor
+from mlfabric.data_processing.text import TextProcessor
 
 
 class NltkTextProcessor(TextProcessor):

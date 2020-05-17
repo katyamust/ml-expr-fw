@@ -89,5 +89,4 @@ target/
 .mypy_cache/
 
 experiments/
-models/
 mlruns/
