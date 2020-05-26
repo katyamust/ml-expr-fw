@@ -13,7 +13,7 @@ It provides a quick starter code for reproducible machine learning.
 
 It does so by providing these main capabilities:
 
-1. **Collaborate** easily by defining a clear structure to the main building blocks used during model experimentation
+1. **Collaborate** easily by defining a clear structure of the main building blocks used during model experimentation
 2. **Experiment** easily by defining a project template for all Jupyter notebooks
 3. **Reproduce** easily by automagically adding experiment logging capabilities to every experiment
 4. **Productize** easily by defining code in classes (with defined APIs) and inherently creating data pipelines

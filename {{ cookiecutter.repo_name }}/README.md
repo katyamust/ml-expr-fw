@@ -7,8 +7,8 @@
 How to run
 ------------
 
-It's advised to use a virtual env (like conda) for this project.
-For conda, creating a new environment:
+It's advised to use a new virtual env (like conda) for this project.
+For conda:
 ```sh
 conda create -n {{cookiecutter.project_name}} python=3.7
 conda activate {{cookiecutter.project_name}}
