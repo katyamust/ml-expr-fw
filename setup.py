@@ -17,6 +17,7 @@ setup(
     packages=find_packages(),
     version=__version__,
     description='Experimentation framework for data science teams',
+    long_description=long_description,
     license='MIT'
 
 )
