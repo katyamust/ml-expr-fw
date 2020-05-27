@@ -14,5 +14,9 @@ nbformat
 jupyter
 jupytext
 
+numpy
+pandas
+sklearn
+
 # backwards compatibility
 pathlib2
