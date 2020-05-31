@@ -36,7 +36,7 @@ conda install cookiecutter
 b. In an empty folder, generate the folder structure and prebuilt classes:
 
 ```sh
-cookiecutter MY_REPO (TODO: replace with mlfabric repo once published)
+cookiecutter git+https://csefy19.visualstudio.com/CSECodeShare/_git/MLExperimentationFramework
 ```
 
 c. From the new repository folder, install requirements:
