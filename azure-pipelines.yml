@@ -39,7 +39,6 @@ steps:
 
   - script: |
       pip install pytest pytest-azurepipelines
-      # pytest --ignore="samples/"
       pytest
     displayName: "pytest"
 
