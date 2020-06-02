@@ -14,7 +14,12 @@ conda create -n {{cookiecutter.project_name}} python=3.7
 conda activate {{cookiecutter.project_name}}
 ```
 
-To install the package locally in interactive model, run
+Install requirements
+```sh
+pip install -r requirements.txt
+```
+
+Install the package locally in interactive model
 ```sh
 pip install -e .
 ```

@@ -110,7 +110,7 @@ class TestCookieSetup(object):
 
         abs_expected_dirs = [str(self.path / d) for d in expected_dirs]
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
-        abs_dirs = [abs_dir for abs_dir in abs_dirs if "cache" not in abs_dir]
+        abs_dirs = [abs_dir for abs_dir in abs_dirs if "cache" not in abs_dir and "checkpoints" not in abs_dir]
 
         actual = set(abs_dirs)
         expected = set(abs_expected_dirs + ignored_dirs)
