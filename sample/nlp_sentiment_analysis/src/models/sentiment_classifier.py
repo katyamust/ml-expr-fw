@@ -38,7 +38,7 @@ class SentimentClassifier(BaseModel):
         :param X: input train data list of movie reviews
         :param y: input train label sentiment for each review
         """
-        corpus = self.preprocessor.apply(X)
+        corpus = self.preprocessor.apply_batch(X)
 
         logging.info("Finished preprocessing input data, fitting TF IDF vectorizer")
 
