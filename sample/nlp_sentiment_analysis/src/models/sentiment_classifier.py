@@ -53,10 +53,10 @@ class SentimentClassifier(BaseModel):
         """
         Predicts movie reviews  sentiment
         :param X: list of of movie text reviews
-        :return:  list of sentiment value 0 or 1 for each review
+        :return: list of sentiment value 0 or 1 for each review
         """
-        corpus = self.preprocessor.apply(X)
+        corpus = self.preprocessor.apply_batch(X)
         Xp_tf_idf = self.vectorizer.transform(corpus)
         y_predicted = self.clf.predict(Xp_tf_idf)
-        self.postprocessor.apply(y_predicted)
+        y_predicted = self.postprocessor.apply_batch(y_predicted)
         return y_predicted

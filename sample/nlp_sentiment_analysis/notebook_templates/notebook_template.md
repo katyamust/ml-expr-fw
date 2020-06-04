@@ -81,6 +81,9 @@ evaluator = MyEvaluator()
 Run experiment
 
 ```python
+
+from src import ExperimentRunner
+ 
 experiment_runner = ExperimentRunner(
     model=model,
     X_train=X_train,

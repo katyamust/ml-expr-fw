@@ -9,6 +9,6 @@ def test_can_load():
     my_loader = NLPSampleDataLoader("imdb", 1.0)
     df1, df2 = my_loader.get_dataset()
 
-    x = df1[0]
+    x = df1['text'][198]
     
-    assert df2 is not None
+    assert x is not None
