@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from src import LoggableObject
+from ner_sample import LoggableObject
 
 
 class EvaluationMetrics(LoggableObject):

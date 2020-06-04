@@ -4,6 +4,8 @@ from time import time
 from .evaluation_metrics import EvaluationMetrics
 from .step_evaluation_metrics import StepEvaluationMetrics
 from .evaluator import Evaluator
+from .ner_evaluation_metrics import NEREvaluationMetrics
+from .ner_evaluator import NEREvaluator
 
 
 class TimeTook(object):
@@ -27,4 +29,11 @@ class TimeTook(object):
         logging.info(f"Time took for {self.description}: {self.end - self.start}")
 
 
-__all__ = ["EvaluationMetrics", "StepEvaluationMetrics", "Evaluator", "TimeTook"]
+__all__ = [
+    "EvaluationMetrics",
+    "StepEvaluationMetrics",
+    "Evaluator",
+    "TimeTook",
+    "NEREvaluator",
+    "NEREvaluationMetrics",
+]

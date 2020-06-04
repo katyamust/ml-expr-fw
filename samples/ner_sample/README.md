@@ -25,12 +25,12 @@ Experiment flow
 ------------
 
 Several objects are used throughout the experiment flow. Specifically:
-- [DataLoader](src/data/data_loader.py): For loading data
-- [DataProcessor](src/data_processing/data_processor.py): For pre and post processing (e.g. feature engineering)
-- [Evaluator](src/evaluation/evaluator.py): For defining the logic for evaluation
-- [Experimentation](src/experimentation/experimentation.py): For defining how the code, params and metrics are logged for future reference
-- [BaseModel](src/models/base_model.py): For defining the actual model logic (fit, predict)
-- [ExperimentRunner](src/experiment_runner.py): For orchestrating an experiment.
+- [DataLoader](ner_sample/data/data_loader.py): For loading data
+- [DataProcessor](ner_sample/data_processing/data_processor.py): For pre and post processing (e.g. feature engineering)
+- [Evaluator](ner_sample/evaluation/evaluator.py): For defining the logic for evaluation
+- [Experimentation](ner_sample/experimentation/experimentation.py): For defining how the code, params and metrics are logged for future reference
+- [BaseModel](ner_sample/models/base_model.py): For defining the actual model logic (fit, predict)
+- [ExperimentRunner](ner_sample/experiment_runner.py): For orchestrating an experiment.
 
 Here is an example flow:
 See [](notebook_templates/example_template.md) For an example of an experiment structure

@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Dict
 
-from src import LoggableObject
+from ner_sample import LoggableObject
 
 
 class DataLoader(LoggableObject):

@@ -2,9 +2,9 @@ import logging
 import pickle
 from abc import abstractmethod
 
-from src import LoggableObject
-from src.data_processing import DataProcessor
-from src.experimentation import Experimentation
+from ner_sample import LoggableObject
+from ner_sample.data_processing import DataProcessor
+from ner_sample.experimentation import Experimentation
 
 
 class BaseModel(LoggableObject):

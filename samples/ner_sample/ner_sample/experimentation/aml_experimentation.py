@@ -5,7 +5,7 @@ try:
 except ImportError:
     pass
 
-from src.experimentation import Experimentation
+from ner_sample.experimentation import Experimentation
 
 
 class AmlExperimentation(Experimentation):

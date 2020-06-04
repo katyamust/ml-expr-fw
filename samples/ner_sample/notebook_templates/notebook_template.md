@@ -15,11 +15,11 @@ Define imports
 
 ```python
 
-from src.data import DataLoader
-from src.models import BaseModel
-from src.data_processing import DataProcessor
-from src.experimentation import MlflowExperimentation
-from src.evaluation import Evaluator, EvaluationMetrics
+from ner_sample.data import DataLoader
+from ner_sample.models import BaseModel
+from ner_sample.data_processing import DataProcessor
+from ner_sample.experimentation import MlflowExperimentation
+from ner_sample.evaluation import Evaluator, EvaluationMetrics
 
 ```
 

@@ -1,8 +1,8 @@
 from abc import abstractmethod
 from typing import Dict
 
-from src import LoggableObject
-from src.evaluation import EvaluationMetrics
+from ner_sample import LoggableObject
+from ner_sample.evaluation import EvaluationMetrics
 
 
 class Evaluator(LoggableObject):

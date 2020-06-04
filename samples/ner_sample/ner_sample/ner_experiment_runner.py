@@ -1,25 +1,23 @@
 import logging
-import sys
 
-from src import LoggableObject
-from src.data.data_loader import DataLoader
-from src.evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
-from src.experimentation import Experimentation
-from src.models import BaseModel
+from flair.data import Corpus
+
+from ner_sample import LoggableObject
+from ner_sample.data import ConllDataLoader
+from ner_sample.evaluation import EvaluationMetrics, StepEvaluationMetrics, NEREvaluator
+from ner_sample.experimentation import Experimentation
+from ner_sample.models import BaseModel
 
 logger = logging.getLogger(__name__)
 
 
-class ExperimentRunner:
+class NERExperimentRunner:
     def __init__(
         self,
         model: BaseModel,
-        X_train,
-        X_test,
-        data_loader: DataLoader,
-        evaluator: Evaluator,
-        y_test=None,
-        y_train=None,
+        corpus: Corpus,
+        data_loader: ConllDataLoader,
+        evaluator: NEREvaluator,
         log_experiment: bool = True,
         experiment_logger: Experimentation = None,
         experiment_name: str = None,
@@ -30,7 +28,7 @@ class ExperimentRunner:
         and metrics in the experimentation service
 
         :param model: model instance (of type BaseModel)
-        :param X_train: The set the model should be evaluated on
+        :param corpus: The object holding the various datasets
         :param y_train: Training set tagged vald be evaluated on
         :param X_test: Test set tagged vald be evaluated on
         :param y_test: Test set tagged values (labels)
@@ -49,10 +47,7 @@ class ExperimentRunner:
         # Call experiment runner and log all objects' parameters:
         experiment_runner = ExperimentRunner(
             model=mock_model,
-            X_train=X_train,
-            X_test=X_test,
-            y_train=y_train,
-            y_test=y_test,
+            corpus=corpus,
             data_loader=data_loader,
             evaluator=evaluator,
             experiment_logger=experiment_logger,
@@ -74,10 +69,7 @@ class ExperimentRunner:
 
         """
         self.model = model
-        self.X_train = X_train
-        self.y_train = y_train
-        self.X_test = X_test
-        self.y_test = y_test
+        self.corpus = corpus
         self.data_loader = data_loader
         self.evaluator = evaluator
         self.experiment_logger = experiment_logger
@@ -142,19 +134,27 @@ class ExperimentRunner:
         return evaluation_result
 
     def fit_model(self) -> None:
-        logger.info(f"Fitting model {self.model.name} on {len(self.X_train)} samples")
+        logger.info(f"Fitting model {self.model.name}")
 
-        self.model.fit(X=self.X_train, y=self.y_train)
+        self.model.fit(X=self.corpus, y=None)
 
     def predict(self):
         """
         Calls the model predict function with the input X_test
         :return: None
         """
-        logger.info(
-            f"Running model.predict() using model {self.model.name} on {len(self.X_test)} test samples"
-        )
-        self._predictions = self.model.predict(X=self.X_test)
+        logger.info(f"Running model.predict() using model {self.model.name}")
+        # Copy gold NER to new label and assign O to all ner labels (to be populated during inference)
+        for sentence in self.corpus.test:
+            # Move gold tags to a new tag (gold_ner)
+            [
+                token.add_tag_label("gold_ner", token.get_tag("ner"))
+                for token in sentence.tokens
+            ]
+            # Erase tags prior to prediction to verify that target tags aren't leaking
+            [token.set_label("ner", value="O") for token in sentence.tokens]
+
+        self._predictions = self.model.predict(self.corpus.test)
 
     def evaluate(self) -> EvaluationMetrics:
         """
@@ -166,7 +166,7 @@ class ExperimentRunner:
             logger.info("Predictions not found, running model.predict")
             self.predict()
 
-        evaluation_result = self.evaluator.evaluate(self.y_test, self._predictions)
+        evaluation_result = self.evaluator.evaluate(self._predictions)
         if self.log_experiment:
             if isinstance(evaluation_result, StepEvaluationMetrics):
                 for step in evaluation_result.get_steps():

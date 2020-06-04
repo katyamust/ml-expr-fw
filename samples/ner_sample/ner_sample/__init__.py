@@ -3,6 +3,7 @@ import sys
 
 from .loggable_object import LoggableObject
 from .experiment_runner import ExperimentRunner
+from .ner_experiment_runner import NERExperimentRunner
 
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s : %(message)s",
@@ -10,4 +11,4 @@ logging.basicConfig(
     stream=sys.stdout,
 )
 
-__all__ = ["LoggableObject", "ExperimentRunner"]
+__all__ = ["LoggableObject", "NERExperimentRunner"]

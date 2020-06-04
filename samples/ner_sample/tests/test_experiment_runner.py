@@ -1,10 +1,10 @@
 from typing import Dict
 
-from src.data import DataLoader
-from src.experimentation import Experimentation, MlflowExperimentation
-from src.models import BaseModel
-from src.evaluation import Evaluator, EvaluationMetrics
-from src import ExperimentRunner
+from ner_sample.data import DataLoader
+from ner_sample.experimentation import Experimentation, MlflowExperimentation
+from ner_sample.models import BaseModel
+from ner_sample.evaluation import Evaluator, EvaluationMetrics
+from ner_sample import ExperimentRunner
 
 
 class MockModel(BaseModel):

@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from typing import Iterable
 
-from src.evaluation import EvaluationMetrics
+from ner_sample.evaluation import EvaluationMetrics
 
 
 class StepEvaluationMetrics(EvaluationMetrics):

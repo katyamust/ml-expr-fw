@@ -1,6 +1,6 @@
 from typing import Dict
 
-from src.data_processing import DataProcessor
+from ner_sample.data_processing import DataProcessor
 
 
 class EmptyProcessor(DataProcessor):

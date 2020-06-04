@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.evaluation import EvaluationMetrics
+from ner_sample.evaluation import EvaluationMetrics
 
 
 class Experimentation(ABC):
