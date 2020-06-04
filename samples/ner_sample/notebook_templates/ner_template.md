@@ -1,4 +1,4 @@
-# Example experiment template
+# Named Entity Recognition experiment
 
 ## Description
 
@@ -38,14 +38,8 @@ from src import ExperimentRunner
 DATASET_NAME = "X"
 DATASET_VERSION = "0.1"
 
-class MockDataLoader(DataLoader):
+class ConllDataLoader(DataLoader):
     def __init__(self, dataset_name, dataset_version):
-        # Mock values, in reality the dataset would be read from file / stream
-        self.X_train = [1, 2, 3, 4, 5]
-        self.y_train = [1, 1, 1, 0, 0]
-        self.X_test = [1, 2, 3, 4, 4]
-        self.y_test = [1, 1, 1, 1, 1]
-
         super().__init__(dataset_name=dataset_name, dataset_version=dataset_version)
 
     def download_dataset(self) -> None:
@@ -93,11 +87,15 @@ class MockModel(BaseModel):
         self.x = None
         super().__init__(model_name=model_name, hyper_params=hyper_params)
 
-    def fit(self, X, y=None) -> None:
+    def fit(
+        self, X, y=None, experimentation: Experimentation = None, **fit_params
+    ) -> None:
         self.x = X
 
     def predict(self, X):
         return self.x == X
+
+
 
 
 mock_model = MockModel(preprocessor = preprocessor, experiment_logger = experiment_logger)

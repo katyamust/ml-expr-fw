@@ -1,11 +1,10 @@
 # Experiment template
+
 *This is an experiment template, used to auto-generate notebooks for new experiments*
 
 ## Experiment description
 
-
-
-##### Jupyter helpers:
+##### Jupyter helpers
 
 ```python
 %reload_ext autoreload
@@ -25,6 +24,7 @@ from src.evaluation import Evaluator, EvaluationMetrics
 ```
 
 ## Load data
+
 *replace MyDataLoader with your DataLoader implementation*
 
 ```python
@@ -38,11 +38,13 @@ X_test, y_test = pickle_data['X_test'], pickle_data['y_test']
 
 Define experimentation object, which will be used for logging the experiments parameters, metrics and artifacts
 *Replace MlflowExperimentation if you use a different experimentation system*
+
 ```python
 experimentation = MlflowExperimentation()
-``` 
+```
 
 Create preprocessor for handling data preprocessing, feature engineering etc.
+
 ```python
 class MyPreprocessor(DataProcessor):
     def apply(self, X):
@@ -56,9 +58,10 @@ preprocessor = MyPreprocessor()
 ```
 
 Create model/logic:
+
 ```python
 class MyModel(BaseModel):
-    def fit(self, X, y=None) -> None:
+    def fit(self, X, y=None, **fit_params) -> None:
         pass
 
     def predict(self, X):
@@ -69,6 +72,7 @@ my_model = MyModel(preprocessor = preprocessor)
 ```
 
 Define evaluation
+
 ```python
 class MyEvaluator(Evaluator):
     def evaluate(self, **kwargs) -> EvaluationMetrics:
@@ -76,7 +80,6 @@ class MyEvaluator(Evaluator):
 
 evaluator = MyEvaluator()
 ```
-
 
 Run experiment
 
