@@ -8,7 +8,7 @@ The notebook template file (in markdown) is located in [../notebook_templates/ex
 To generate a Jupyter notebook from this template, run:
 
 ```
-python generate_notebook --name my_new_notebook.ipynb --template_file example_template.md
+python generate_notebook.py --name my_new_notebook.ipynb --template_file example_template.md
 ```
 
 ### Jupyter helpers

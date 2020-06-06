@@ -34,18 +34,16 @@ steps:
       pip install --upgrade setuptools
       pip install wheel
       pip install -r requirements.txt
-      pip install -r sample/nlp_sentiment_analysis/requirements.txt
-      python sample/nlp_sentiment_analysis/setup.py install
+      python setup.py install
     displayName: "Install dependencies"
 
   - script: |
       pip install pytest pytest-azurepipelines
-      # pytest --ignore="samples/"
       pytest
     displayName: "pytest"
 
   - script: |
-      python sample/nlp_sentiment_analysis/setup.py bdist_wheel
+      python setup.py bdist_wheel
     displayName: "Create wheel"
 
   - task: PublishBuildArtifacts@1

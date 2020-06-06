@@ -7,14 +7,19 @@
 How to run
 ------------
 
-It's advised to use a new virtual env (like conda) for this project.
-For conda:
+It's advised to use a virtual env (like conda) for this project.
+For conda, creating a new environment:
 ```sh
 conda create -n {{cookiecutter.project_name}} python=3.7
 conda activate {{cookiecutter.project_name}}
 ```
 
-To install the package locally in interactive model, run
+Install requirements
+```sh
+pip install -r requirements.txt
+```
+
+Install the package locally in interactive model
 ```sh
 pip install -e .
 ```
