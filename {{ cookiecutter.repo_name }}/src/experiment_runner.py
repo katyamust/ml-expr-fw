@@ -1,10 +1,10 @@
 import logging
 
-from ner_sample import LoggableObject
-from ner_sample.data.data_loader import DataLoader
-from ner_sample.evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
-from ner_sample.experimentation import Experimentation
-from ner_sample.models import BaseModel
+from src import LoggableObject
+from src.data.data_loader import DataLoader
+from src.evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
+from src.experimentation import Experimentation
+from src.models import BaseModel
 
 logger = logging.getLogger(__name__)
 
