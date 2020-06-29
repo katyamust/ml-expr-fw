@@ -15,4 +15,7 @@ class NEREvaluationMetrics(EvaluationMetrics):
         return f"F1 score: {self.f1}, Accuracy score: {self.accuracy}"
 
     def get_metrics(self):
-        return self.__dict__
+        """
+        Return a dict with f1 and accuracy values
+        """
+        return { "f1": self.f1, "accuracy":self.accuracy }

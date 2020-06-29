@@ -45,7 +45,6 @@ class DataLoader(LoggableObject):
         :return: Dictionary with parameters to load into the experiment logging system
         """
         params = {
-            "data loader": self.name,
             "dataset_name": self.dataset_name,
             "dataset_version": self.dataset_version,
         }

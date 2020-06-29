@@ -5,14 +5,15 @@ from ner_sample.evaluation import Evaluator, NEREvaluationMetrics
 
 class NEREvaluator(Evaluator):
     """
-    This class holds the logic for evaluating a NER prediction outcome
+    This class holds the logic for evaluating a prediction outcome
+    y_test in our case is None
     """
 
-    def evaluate(self, predicted_sentences) -> NEREvaluationMetrics:
+    def evaluate(self, y_test, predictions) -> NEREvaluationMetrics:
+
         golds = []
         predicted = []
-        print(predicted_sentences)
-        for sentence in predicted_sentences:
+        for sentence in predictions:
             gold_tags = [token.get_tag("gold_ner").value for token in sentence.tokens]
             golds.append(gold_tags)
             predicted_tags = [token.get_tag("ner").value for token in sentence.tokens]

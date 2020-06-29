@@ -1,99 +1,46 @@
-from typing import Dict
+import os
+from pathlib import Path
 
-from ner_sample.data import DataLoader
-from ner_sample.experimentation import Experimentation, MlflowExperimentation
-from ner_sample.models import BaseModel
-from ner_sample.evaluation import Evaluator, EvaluationMetrics
+import pytest
+
 from ner_sample import ExperimentRunner
-
-
-class MockModel(BaseModel):
-    def get_params(self) -> Dict:
-        return {"param_value": "1"}
-
-    def __init__(self, model_name=None, **hyper_params):
-        self.x = None
-        super().__init__(model_name=model_name, hyper_params=hyper_params)
-
-    def fit(
-        self, X, y=None, experimentation: Experimentation = None, **fit_params
-    ) -> None:
-        self.x = X
-
-    def predict(self, X):
-        return self.x == X
-
-
-class MockEvaluationMetrics(EvaluationMetrics):
-    def __init__(self, precision, recall):
-        self.precision = precision
-        self.recall = recall
-        super().__init__()
-
-    def get_metrics(self):
-        return {"precision": self.precision, "recall": self.recall}
-
-
-class MockEvaluator(Evaluator):
-    def __init__(self, expected_recall, expected_precision):
-        self.expected_recall = expected_recall
-        self.expected_precision = expected_precision
-        super().__init__()
-
-    def evaluate(self, predicted, actual) -> EvaluationMetrics:
-        return MockEvaluationMetrics(
-            recall=self.expected_recall, precision=self.expected_precision
-        )
-
-
-class MockDataLoader(DataLoader):
-    def __init__(
-        self, X_train, y_train, X_test, y_test, dataset_name="X", dataset_version=1
-    ):
-        self.X_train = X_train
-        self.y_train = y_train
-        self.X_test = X_test
-        self.y_test = y_test
-
-        super().__init__(dataset_name=dataset_name, dataset_version=dataset_version)
-
-    def download_dataset(self) -> None:
-        pass
-
-    def get_dataset(self, dataset_name, dataset_version):
-        return self.X_train, self.y_train, self.X_test, self.y_test
+from ner_sample.evaluation import NEREvaluator
+from tests.mocks import MockDataLoader, MockModel, MockExperimentation
 
 
 def test_experiment_runner():
-    X_train = [1, 2, 3, 4, 5]
-    y_train = [1, 1, 1, 0, 0]
-    X_test = [1, 2, 3, 4, 4]
-    y_test = [1, 1, 1, 1, 1]
-
-    data_loader = MockDataLoader(
-        X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test
-    )
-
-    expected_recall = 0.5
-    expected_precision = 0.7
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    mock_data_path = Path(dir_path, "resources").resolve()
+    data_loader = MockDataLoader(local_data_path=mock_data_path)
+    corpus, test = data_loader.get_dataset()
+    train = corpus.train
+    assert train is not None
+    assert test is not None
 
     model = MockModel(model_name="Mock", param1="hello", param2="world")
-    evaluator = MockEvaluator(
-        expected_recall=expected_recall, expected_precision=expected_precision
-    )
-    experiment_logger = MlflowExperimentation()
+    evaluator = NEREvaluator()
+    experiment_logger = MockExperimentation()
     experiment_runner = ExperimentRunner(
         model=model,
-        X_train=X_train,
-        X_test=X_test,
-        y_train=y_train,
-        y_test=y_test,
+        X_train=train,
+        X_test=test,
         data_loader=data_loader,
         evaluator=evaluator,
         experiment_logger=experiment_logger,
         experiment_name="Text",
+        one_additional_param="Will this work"
     )
     results = experiment_runner.run()
 
-    assert results.precision == expected_precision
-    assert results.recall == expected_recall
+    assert results.f1 == pytest.approx(0.7, 0.1)
+    assert results.accuracy == pytest.approx(0.9, 0.1)
+
+    # assert params and metrics are logged
+    assert 'param1' in experiment_logger.params
+    assert 'param2' in experiment_logger.params
+
+    assert experiment_logger.params['param1'] == 'hello'
+    assert experiment_logger.params['param2'] == 'world'
+    assert experiment_logger.params['one_additional_param'] == 'Will this work'
+    assert experiment_logger.metrics['f1'] == results.f1
+    assert experiment_logger.metrics['accuracy'] == results.accuracy

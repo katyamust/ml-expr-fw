@@ -53,6 +53,24 @@ class FlairNERModel(BaseModel):
 
         super().__init__(**hyper_params)
 
+    def fit(self, X, y=None) -> None:
+        # initialize trainer
+        trainer: ModelTrainer = ModelTrainer(self.tagger, X)
+
+        trainer.train(
+            "models/taggers/flair-ner",
+            train_with_dev=self.train_with_dev,
+            max_epochs=self.max_epochs,
+        )
+
+    def predict(self, X):
+        tagged_sentences = []
+        for sentence in tqdm(X):
+            self.tagger.predict(sentence)
+            tagged_sentences.append(sentence)
+        print(f"Tagged {len(tagged_sentences)} sentences")
+        return tagged_sentences
+
     def get_hyper_params(self, **hyper_params):
         basic_params = {
             param_name: param_value
@@ -97,20 +115,3 @@ class FlairNERModel(BaseModel):
             use_crf=False,
         )
         self.tagger = tagger
-
-    def fit(self, corpus: Corpus) -> None:
-        # initialize trainer
-        trainer: ModelTrainer = ModelTrainer(self.tagger, corpus)
-
-        trainer.train(
-            "models/taggers/flair-ner",
-            train_with_dev=self.train_with_dev,
-            max_epochs=self.max_epochs,
-        )
-
-    def predict(self, sentences):
-        tagged_sentences = []
-        for sentence in tqdm(sentences):
-            self.tagger.predict(sentence)
-            tagged_sentences.append(sentence)
-        return tagged_sentences

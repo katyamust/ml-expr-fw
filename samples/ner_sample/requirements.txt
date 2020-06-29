@@ -18,6 +18,7 @@ jupytext
 pathlib2
 
 # package specific
+requests
 flair
 seqeval
 tqdm

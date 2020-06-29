@@ -1,29 +1,28 @@
 import logging
-import sys
 
-from src import LoggableObject
-from src.data.data_loader import DataLoader
-from src.evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
-from src.experimentation import Experimentation
-from src.models import BaseModel
+from ner_sample import LoggableObject
+from ner_sample.data.data_loader import DataLoader
+from ner_sample.evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
+from ner_sample.experimentation import Experimentation
+from ner_sample.models import BaseModel
 
 logger = logging.getLogger(__name__)
 
 
 class ExperimentRunner:
     def __init__(
-        self,
-        model: BaseModel,
-        X_train,
-        X_test,
-        data_loader: DataLoader,
-        evaluator: Evaluator,
-        y_test=None,
-        y_train=None,
-        log_experiment: bool = True,
-        experiment_logger: Experimentation = None,
-        experiment_name: str = None,
-        **experiment_params_to_log,
+            self,
+            model: BaseModel,
+            X_train,
+            X_test,
+            data_loader: DataLoader,
+            evaluator: Evaluator,
+            y_test=None,
+            y_train=None,
+            log_experiment: bool = True,
+            experiment_logger: Experimentation = None,
+            experiment_name: str = None,
+            **experiment_params_to_log,
     ):
         """
         Runs one model, evaluates results, and stores all parameters
@@ -99,25 +98,32 @@ class ExperimentRunner:
                     "Experiment name must be specified for the experiment logging system"
                 )
 
-            logger.info(f"Connecting to {self.experiment_logger.name}")
-            self.experiment_logger.set_experiment(name=experiment_name)
-            self.experiment_logger.start_run()
+            self.additional_params = experiment_params_to_log
 
-            self._log_loggable_object(model, "Model")
-            self._log_loggable_object(evaluator, "Evaluator")
-            self._log_loggable_object(data_loader, "DataLoader")
+            self.log(data_loader, evaluator, model)
 
-            if model.preprocessor:
-                self._log_loggable_object(model.preprocessor, "Preprocessor")
-            if model.postprocessor:
-                self._log_loggable_object(model.postprocessor, "Postprocessor")
-
-            # Log additional inputs to this class
-            if experiment_params_to_log:
-                logger.info(
-                    f"Logging these experiments as well: {experiment_params_to_log}"
-                )
-                self.experiment_logger.log_params(experiment_params_to_log)
+    def log(self, data_loader, evaluator, model):
+        """
+        Stores the parameters and metrics from the various modules
+        and those that were added to ExperimentRunner as kwargs,
+        into the experiment logger module.
+        """
+        logger.info(f"Connecting to {self.experiment_logger.name}")
+        self.experiment_logger.set_experiment(name=self.experiment_name)
+        self.experiment_logger.start_run()
+        self._log_loggable_object(model, "Model")
+        self._log_loggable_object(evaluator, "Evaluator")
+        self._log_loggable_object(data_loader, "DataLoader")
+        if model.preprocessor:
+            self._log_loggable_object(model.preprocessor, "Preprocessor")
+        if model.postprocessor:
+            self._log_loggable_object(model.postprocessor, "Postprocessor")
+        # Log additional inputs to this class
+        if self.additional_params:
+            logger.info(
+                f"Logging these additional parameters as well: {self.additional_params}"
+            )
+            self.experiment_logger.log_params(self.additional_params)
 
     def _log_loggable_object(self, loggable_object: LoggableObject, object_name):
         if loggable_object:
@@ -162,9 +168,11 @@ class ExperimentRunner:
         :return: EvaluationResult
         """
 
-        if self._predictions is None:
+        if self._predictions is None or len(self._predictions) == 0:
             logger.info("Predictions not found, running model.predict")
             self.predict()
+        else:
+            logger.info("Predictions found, skipping model.predict call")
 
         evaluation_result = self.evaluator.evaluate(self.y_test, self._predictions)
         if self.log_experiment:
