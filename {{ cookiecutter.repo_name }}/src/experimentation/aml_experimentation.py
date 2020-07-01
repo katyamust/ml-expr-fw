@@ -9,7 +9,6 @@ from src.experimentation import Experimentation
 
 
 class AmlExperimentation(Experimentation):
-
     def __init__(self, ws):
         super().__init__()
         self.aml_ws = ws

@@ -14,7 +14,9 @@ class DataLoader(LoggableObject):
     :param dataset_version: Version of dataset for reproducibility
     """
 
-    def __init__(self, dataset_name, dataset_version, data_loader_name=None, **data_params):
+    def __init__(
+        self, dataset_name, dataset_version, data_loader_name=None, **data_params
+    ):
         self.dataset_name = dataset_name
         self.dataset_version = dataset_version
         self.data_params = data_params

@@ -5,7 +5,7 @@ It provides a quick starter code for reproducible machine learning.
 
 ![Experiment flow](assets/experiment-flow.png)
 
-## TL;DR: What does this framework do
+## TL;DR: What this framework does
 
 - First, it builds on top of the awesome
 [CookieCutter-DataScience](https://drivendata.github.io/cookiecutter-data-science/) template which takes care of your project structure and python package setup.

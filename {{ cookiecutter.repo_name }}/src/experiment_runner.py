@@ -11,18 +11,18 @@ logger = logging.getLogger(__name__)
 
 class ExperimentRunner:
     def __init__(
-            self,
-            model: BaseModel,
-            X_train,
-            X_test,
-            data_loader: DataLoader,
-            evaluator: Evaluator,
-            y_test=None,
-            y_train=None,
-            log_experiment: bool = True,
-            experiment_logger: Experimentation = None,
-            experiment_name: str = None,
-            **experiment_params_to_log,
+        self,
+        model: BaseModel,
+        X_train,
+        X_test,
+        data_loader: DataLoader,
+        evaluator: Evaluator,
+        y_test=None,
+        y_train=None,
+        log_experiment: bool = True,
+        experiment_logger: Experimentation = None,
+        experiment_name: str = None,
+        **experiment_params_to_log,
     ):
         """
         Runs one model, evaluates results, and stores all parameters
