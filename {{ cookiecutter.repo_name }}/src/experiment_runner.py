@@ -1,10 +1,10 @@
 import logging
 
-from src import LoggableObject
-from src.data.data_loader import DataLoader
-from src.evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
-from src.experimentation import Experimentation
-from src.models import BaseModel
+from . import LoggableObject
+from .data.data_loader import DataLoader
+from .evaluation import EvaluationMetrics, StepEvaluationMetrics, Evaluator
+from .experimentation import Experimentation
+from .models import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -158,7 +158,8 @@ class ExperimentRunner:
         :return: None
         """
         logger.info(
-            f"Running model.predict() using model {self.model.name} on {len(self.X_test)} test samples"
+            f"Running model.predict() using model {self.model.name} "
+            f"on {len(self.X_test)} test samples"
         )
         self._predictions = self.model.predict(X=self.X_test)
 
@@ -193,7 +194,8 @@ class ExperimentRunner:
         """
         if self._predictions is None:
             logger.info(
-                "Model was not predicted. Make sure you called `predict_model()` to calculate predictions"
+                "Model was not predicted. "
+                "Make sure you called `predict_model()` to calculate predictions"
             )
             return None
         else:

@@ -6,7 +6,7 @@ from typing import List
 
 import mlflow
 
-from src.experimentation import Experimentation
+from . import Experimentation
 
 
 class MlflowExperimentation(Experimentation):
@@ -89,6 +89,11 @@ class MlflowExperimentation(Experimentation):
         max_results=100000,
         order_by=None,
     ):
+        """
+        Get a pandas DataFrame of runs that fit the search criteria.
+        See mlflow.search_runs
+        :return:
+        """
         mlflow.search_runs(
             experiment_ids=experiment_ids,
             filter_string=filter_string,

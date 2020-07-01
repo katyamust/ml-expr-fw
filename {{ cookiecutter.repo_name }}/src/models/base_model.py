@@ -47,9 +47,10 @@ class BaseModel(LoggableObject):
         )
 
     @abstractmethod
+    # pylint: disable=invalid-name
     def fit(self, X, y=None) -> None:
         """
-        Trains/fits a model. Parameters to the fit function should be added 
+        Trains/fits a model. Parameters to the fit function should be added
         via the constructor to verify that they are logged on the experiment logger.
         :param X Training set
         :param y Target values
@@ -58,6 +59,7 @@ class BaseModel(LoggableObject):
         pass
 
     @abstractmethod
+    # pylint: disable=invalid-name
     def predict(self, X):
         """
         Run prediction on a new set. Actual implementation,
@@ -89,8 +91,8 @@ class BaseModel(LoggableObject):
         :param file_path: Path to pickle
         :return:
         """
-        with open(file_path, "wb+") as f:
-            pickle.dump(self, file=f)
+        with open(file_path, "wb+") as file:
+            pickle.dump(self, file=file)
 
     @classmethod
     def load(cls, file_path):
@@ -100,6 +102,6 @@ class BaseModel(LoggableObject):
         :param file_path: Path to pickle file
         :return: An model of type BaseModel
         """
-        with open(file_path, "rb") as f:
-            obj = pickle.load(f)
+        with open(file_path, "rb") as file:
+            obj = pickle.load(file)
         return obj
