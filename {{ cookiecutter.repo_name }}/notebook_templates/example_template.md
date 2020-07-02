@@ -93,15 +93,11 @@ class MockModel(BaseModel):
         self.x = None
         super().__init__(model_name=model_name, hyper_params=hyper_params)
 
-    def fit(
-        self, X, y=None, experimentation: Experimentation = None, **fit_params
-    ) -> None:
+    def fit(self, X, y=None) -> None:
         self.x = X
 
     def predict(self, X):
         return self.x == X
-
-
 
 
 mock_model = MockModel(preprocessor = preprocessor, experiment_logger = experiment_logger)

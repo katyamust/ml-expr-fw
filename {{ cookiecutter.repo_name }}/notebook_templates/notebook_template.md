@@ -58,7 +58,7 @@ preprocessor = MyPreprocessor()
 Create model/logic:
 ```python
 class MyModel(BaseModel):
-    def fit(self, X, y=None, **fit_params) -> None:
+    def fit(self, X, y=None) -> None:
         pass
 
     def predict(self, X):

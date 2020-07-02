@@ -8,6 +8,7 @@ class LoggableObject(ABC):
     Base abstract class for all objects, enforces the implementation of get_params and get_metrics
     to allow logging of all parts of the pipeline into the experiment logger
     """
+
     def __init__(self, name=None):
         self.name = name
         if not name:

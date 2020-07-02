@@ -21,7 +21,7 @@ class MockModel(BaseModel):
         self.x = X
 
     def predict(self, X):
-        return self.x == X
+        return [self.x == X]
 
 
 class MockEvaluationMetrics(EvaluationMetrics):
