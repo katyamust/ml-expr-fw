@@ -10,4 +10,4 @@ class NLPSampleDataLoader(DataLoader):
         df_train = pd.read_csv('../csv/imdb_train.csv')
         df_test  = pd.read_csv('../csv/imdb_test.csv')
 
-        return df_train.head(200), df_test.head(200)
+        return df_train, df_test
