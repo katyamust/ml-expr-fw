@@ -48,8 +48,8 @@ pip install -e .
 ```
 
 ## Example usage
-[This notebook](samples/ner_sample/notebooks/flair_ner.ipynb) shows the full implementation of a Named Entity Recognition problem
-[This notebook](samples/ner_sample/notebooks/flair_ner_clean.ipynb) shows the same, after the modules have been implemented (final outcome)
+- [This notebook](samples/ner_sample/notebooks/flair_ner.html) shows the full implementation of a Named Entity Recognition problem
+- [This notebook](samples/ner_sample/notebooks/flair_ner_clean.html) shows the same, after the modules have been implemented (final outcome)
 
 ## Why use this framework
 
