@@ -3,7 +3,10 @@
 Generic experimentation framework for data scientists and data science teams.
 It provides a quick starter code for reproducible machine learning.
 
-![Experiment flow](assets/experiment-flow.png)
+<p align="center">
+  <img src="assets/experiment-flow.png" alt="Experiment flow"/>
+</p>
+
 
 ## TL;DR: What this framework does
 
