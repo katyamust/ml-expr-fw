@@ -51,6 +51,9 @@ pip install -e .
 - [This notebook](samples/ner_sample/notebooks/flair_ner.html) shows the full implementation of a Named Entity Recognition problem
 - [This notebook](samples/ner_sample/notebooks/flair_ner_clean.html) shows the same, after the modules have been implemented (final outcome)
 
+## Using this framework? 
+Trying it out? decided not to? We'd like to hear. Please fill in [this (very) short survey](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR9LagCGNW01LpMix2pnFWFJUOE1ROElWTldGWTNGRVU4WkM0NE9GOTYzNi4u)
+
 ## Why use this framework
 
 Machine learning experimentation is a complex process which can take many months, 
