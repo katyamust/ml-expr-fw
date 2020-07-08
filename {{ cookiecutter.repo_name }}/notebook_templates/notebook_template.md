@@ -9,7 +9,7 @@
 
 ```python
 %reload_ext autoreload
-%autoreload
+%autoreload 2
 ```
 
 Define imports
@@ -21,6 +21,7 @@ from src.models import BaseModel
 from src.data_processing import DataProcessor
 from src.experimentation import MlflowExperimentation
 from src.evaluation import Evaluator, EvaluationMetrics
+from src import ExperimentRunner
 
 ```
 

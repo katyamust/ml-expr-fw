@@ -1,5 +1,7 @@
-# Experiment template
+# Iris species detection: experiment template
 *This is an experiment template, used to auto-generate notebooks for new experiments*
+
+To generate new notebooks, call `python -m generate_notebook --name my_notebook`
 
 ## Experiment description
 
@@ -9,47 +11,45 @@
 
 ```python
 %reload_ext autoreload
-%autoreload
+%autoreload 2
 ```
 
 Define imports
 
 ```python
-
-from iris.data import DataLoader
+from iris.data import IrisDataLoader
 from iris.models import BaseModel
 from iris.data_processing import DataProcessor
 from iris.experimentation import MlflowExperimentation
-from iris.evaluation import Evaluator, EvaluationMetrics
-
+from iris.evaluation import IrisEvaluator, IrisEvaluationMetrics
+from iris import ExperimentRunner
 ```
 
 ## Load data
-*replace MyDataLoader with your DataLoader implementation*
 
 ```python
-data_loader = MyDataLoader()
+data_loader = IrisDataLoader(dataset_name = 'iris', dataset_version = "1")
+data_loader.prep_dataset_for_modeling()
 data_loader.download_dataset()
-dataset_for_modeling = data_loader.get_dataset()
-pickle_data = pickle.load(dataset_for_modeling)
-X_train, y_train = pickle_data['X_train'], pickle_data['y_train']
-X_test, y_test = pickle_data['X_test'], pickle_data['y_test']
+X_train, y_train, X_test, y_test = data_loader.get_dataset()
+
+X_train.head()
 ```
 
 Define experimentation object, which will be used for logging the experiments parameters, metrics and artifacts
 *Replace MlflowExperimentation if you use a different experimentation system*
 ```python
 experimentation = MlflowExperimentation()
-``` 
+```
 
-Create preprocessor for handling data preprocessing, feature engineering etc.
+## Preprocessing, modeling and post processing logic
 ```python
 class MyPreprocessor(DataProcessor):
     def apply(self, X):
-        pass
-
+        return X
+    
     def apply_batch(self, X):
-        pass
+        return X
 
 preprocessor = MyPreprocessor()
 
@@ -64,21 +64,16 @@ class MyModel(BaseModel):
     def predict(self, X):
         pass
 
-
 my_model = MyModel(preprocessor = preprocessor)
 ```
 
 Define evaluation
 ```python
-class MyEvaluator(Evaluator):
-    def evaluate(self, **kwargs) -> EvaluationMetrics:
-        pass
-
-evaluator = MyEvaluator()
+evaluator = IrisEvaluator()
 ```
 
 
-Run experiment
+## Run experiment
 
 ```python
 experiment_runner = ExperimentRunner(
@@ -96,5 +91,9 @@ experiment_runner = ExperimentRunner(
 
 results = experiment_runner.run()
 print(results)
+
+```
+
+```python
 
 ```

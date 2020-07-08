@@ -15,7 +15,7 @@ python generate_notebook.py --name my_new_notebook.ipynb --template_file example
 
 ```python
 %reload_ext autoreload
-%autoreload
+%autoreload 2
 ```
 
 ### Define imports

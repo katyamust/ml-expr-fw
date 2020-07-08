@@ -8,7 +8,7 @@
 
 ```python
 %reload_ext autoreload
-%autoreload
+%autoreload 2
 ```
 
 Define imports
