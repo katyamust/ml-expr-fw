@@ -15,7 +15,7 @@ python generate_notebook.py --name my_new_notebook.ipynb --template_file example
 
 ```python
 %reload_ext autoreload
-%autoreload 2
+%autoreload
 ```
 
 ### Define imports
@@ -23,12 +23,12 @@ python generate_notebook.py --name my_new_notebook.ipynb --template_file example
 ```python
 from typing import Dict
 
-from src.data import DataLoader
-from src.data_processing import DataProcessor, EmptyProcessor
-from src.experimentation import Experimentation, MlflowExperimentation
-from src.models import BaseModel
-from src.evaluation import Evaluator, EvaluationMetrics
-from src import ExperimentRunner
+from iris.data import DataLoader
+from iris.data_processing import DataProcessor, EmptyProcessor
+from iris.experimentation import Experimentation, MlflowExperimentation
+from iris.models import BaseModel
+from iris.evaluation import Evaluator, EvaluationMetrics
+from iris import ExperimentRunner
 
 ```
 
