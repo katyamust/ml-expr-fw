@@ -51,8 +51,7 @@ pip install -e .
 ```
 
 ## Example usage
-1. Example 1: [Simple classifier on the iris dataset](samples/iris/notebooks/iris.ipynb)
-([HTML version](samples/iris/notebooks/iris.html))
+1. Example 1: Simple classifier on the iris dataset ([ipynb version](samples/iris/notebooks/iris.ipynb), [html version](samples/iris/notebooks/iris.html))
 
 2. Example 2: NER using the `flair` nlp package:
 - This notebook shows the full implementation of a Named Entity Recognition problem ([ipynb](samples/ner_sample/notebooks/flair_ner.ipynb), [html](samples/ner_sample/notebooks/flair_ner.html))
