@@ -5,11 +5,11 @@ It provides a quick starter code for reproducible machine learning.
 
 ![Experiment flow](assets/experiment-flow.png)
 
-## TL;DR: What does this framework do
+## TL;DR: What this framework does
 
-- First, it builds on top of the awesome
+- First, it provides functionality for conducting rigorous experimentation: structured, reproducible and robust.
+- Then, it builds on top of the awesome
 [CookieCutter-DataScience](https://drivendata.github.io/cookiecutter-data-science/) template which takes care of your project structure and python package setup.
-- Then, it provides functionality for conducting rigorous experimentation: structured, reproducible and robust.
 
 It does so by providing these main capabilities:
 
@@ -19,33 +19,44 @@ It does so by providing these main capabilities:
 4. **Productize** easily by defining code in classes (with defined APIs)
 
 ## How to install
-To create a new package for a new experiment:
+To create a new project:
 
-a. Install `cookiecutter` (preferably in a virtual environment):
+a. Install `cookiecutter`:
+
+- pip:
+
 ```
 pip install cookiecutter
 ```
 
-or (through conda):
+- conda:
 
 ```
 conda config --add channels conda-forge
 conda install cookiecutter
 ```
 
-b. In an empty folder, generate the folder structure and prebuilt classes:
+b. In an empty folder, generate the project structure:
 
 ```sh
 cookiecutter git+https://csefy19.visualstudio.com/CSECodeShare/_git/MLExperimentationFramework
 ```
-
-c. From the root of the folder, install requirements:
-
-```sh
-conda create -n ENV_NAME python=3.7
-conda activate ENV_NAME
-pip install -e .
+or 
 ```
+python -m cookiecutter git+https://csefy19.visualstudio.com/CSECodeShare/_git/MLExperimentationFramework
+```
+
+c. Follow the instructions on the README file in the newly created project.
+
+## Example usage
+1. Example 1: Simple classifier on the iris dataset ([ipynb version](samples/iris/notebooks/iris.ipynb), [html version](samples/iris/notebooks/iris.html))
+
+2. Example 2: NER using the `flair` nlp package:
+- This notebook shows the full implementation of a Named Entity Recognition problem ([ipynb](samples/ner_sample/notebooks/flair_ner.ipynb), [html](samples/ner_sample/notebooks/flair_ner.html))
+- This notebook shows the same, after the modules have been implemented (final outcome) ([ipynb](samples/ner_sample/notebooks/flair_ner_clean.ipynb), [html]([This notebook](samples/ner_sample/notebooks/flair_ner_clean.html)))
+
+## Using this framework? 
+Trying it out? decided not to? We'd like to hear. Please fill in [this (very) short survey](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR9LagCGNW01LpMix2pnFWFJUOE1ROElWTldGWTNGRVU4WkM0NE9GOTYzNi4u)
 
 ## Why use this framework
 

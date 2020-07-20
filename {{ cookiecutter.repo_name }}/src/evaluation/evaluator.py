@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Dict
 
 from src import LoggableObject
-from src.evaluation import EvaluationMetrics
+from . import EvaluationMetrics
 
 
 class Evaluator(LoggableObject):

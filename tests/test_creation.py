@@ -119,22 +119,3 @@ class TestCookieSetup(object):
         print(f"Expected folders: {expected}")
 
         assert len(actual - expected) == 0
-
-    def test_notebook_creation(self):
-
-        runner = CliRunner()
-
-        generator_path = str(self.path / "generate_notebook.py")
-        template_path = str(self.path / "notebook_templates/notebook_template.md")
-        notebook_path = str(self.path / "notebooks/test.ipynb")
-        sys.path.append(generator_path)
-        from generate_notebook import generate_notebook
-
-        runner.invoke(
-            generate_notebook,
-            ["--name", notebook_path, "--template_file", template_path],
-        )
-
-        with open(notebook_path, "r") as file:
-            lines = file.readlines()
-            assert len(lines) > 10

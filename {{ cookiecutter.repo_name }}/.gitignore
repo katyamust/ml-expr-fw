@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+tests/__pycache__/*
+*.pytest_cache/
 
 # C extensions
 *.so
@@ -76,7 +78,26 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+data/*
+
+# But keep the folder structure
+# (first line: include external, second line: remove all files in external, third line: include .gitkeep)
+
+!data/external
+data/external/*
+!data/external/.gitkeep
+
+!data/interim/
+data/interim/*
+!data/interim/.gitkeep
+
+!data/processed/
+data/processed/*
+!data/processed/.gitkeep
+
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
 
 # Mac OS-specific storage files
 .DS_Store
@@ -87,3 +108,6 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+#MLflow runs
+mlruns/
